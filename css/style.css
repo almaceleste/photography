@@ -643,7 +643,7 @@ input[type="radio"].visually-hidden {
 }
 
 /* Chrome/Opera/Safari */
-.message__field:::-webkit-input-placeholder {
+.message__field::-webkit-input-placeholder {
   color: #2b2d5c;
 }  
 

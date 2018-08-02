@@ -4,7 +4,7 @@ var timer;
 
 var form = document.querySelector(".message__form");
 var btn = form.querySelector(".message__btn");
-var patternName = '/^[a-zA-Zа-яёА-ЯЁ\s\-]+$/';
+var patternName = /^[a-zA-Zа-яёА-ЯЁ\s\-]+$/;
 var patternMail	= /^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z])+$/i;
 
 var popup = document.querySelector(".modal-message");
@@ -47,17 +47,28 @@ function validateForm(evt) {
   var userName = form.querySelector("[name=username]");
   var userEmail = form.querySelector("[name=usermail]");
   
-
-  if(!userName.value || patternName.test(userEmail.value) == false) {
+  if(!patternName.test(userName.value)) {
     userName.classList.add("message__field--error");
     return false;
   }
   
-  if(!userEmail.value || patternMail.test(userEmail.value) == false) {
+  if(!patternMail.test(userEmail.value)) {
     userEmail.classList.add("message__field--error");
     return false;
   }
+
+  // проверка сообщения
+  var mes = $('#mes-field');
+  if(mes.val() == ''){
+    console.log('mes');
+    mes.addClass('message__field--error');
+    mes.focus();
+    return false;
+  }
   
+  // код для отправки формы и отображения попапа 
+  form.submit();
+  popup.style.display = 'block';
   return true;
 }
 
