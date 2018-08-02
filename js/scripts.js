@@ -44,30 +44,45 @@ btn.addEventListener('click', validateForm);
 
 function validateForm(evt) {
   evt.preventDefault();
-  var userName = form.querySelector("[name=username]");
-  var userEmail = form.querySelector("[name=usermail]");
-  
-  if(!patternName.test(userName.value)) {
-    userName.classList.add("message__field--error");
+
+  // определение полей формы
+  var name = $('#name-field');
+  var email = $('#email-field');
+  var mes = $('#mes-field');
+
+  console.log(name.val());
+  console.log(email.val());
+  console.log(mes.val());
+
+  // сброс отображения предыдущей валидации
+  name.removeClass('message__field--error');
+  email.removeClass('message__field--error');
+  mes.removeClass('message__field--error');
+
+  if(!patternName.test(name.val())) {
+    console.log(name.val());
+    name.addClass("message__field--error");
+    name.focus();
     return false;
   }
   
-  if(!patternMail.test(userEmail.value)) {
-    userEmail.classList.add("message__field--error");
+  if(!patternMail.test(email.val())) {
+    console.log(email.val());
+    email.addClass("message__field--error");
+    email.focus();
     return false;
   }
 
   // проверка сообщения
-  var mes = $('#mes-field');
   if(mes.val() == ''){
-    console.log('mes');
+    console.log(mes.val());
     mes.addClass('message__field--error');
     mes.focus();
     return false;
   }
   
   // код для отправки формы и отображения попапа 
-  form.submit();
+  //form.submit();
   popup.style.display = 'block';
   return true;
 }
